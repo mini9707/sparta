@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>상세 페이지</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/63948d20cf.js" crossorigin="anonymous"></script>
+    <style>
+        .title {
+            text-align: center;
+            padding: 20px;
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            /* 이미지 및 설명을 가로로 중앙에 위치시키는 방법 추가 */
+        }
+        .image {
+            max-width: 30%;
+            margin-left: 10px;
+            /* 좌측 마진을 조정합니다. */
+            margin-right: 10px;
+            /* 우측 마진을 조정합니다. */
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .description {
+            max-width: 70%;
+            padding-left: 20px;
+        }
+        .pr1 {
+            background-color: green;
+        }
+        .hide {
+            display: none;
+        }
+        .mytext {
+            border-color: black;
+            background-color: white;
+            border-radius: 10px;
+            font-size: 20px;
+            transition: all 0.4s;
+        }
+        .mytitle1 {
+            width: 100%;
+            height: 250px;
+            background-position: center;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        .img {
+            flex-direction: column;
+            float: left;
+            filter: drop-shadow(10px 6px 6px #C3C3C3)
+        }
+        .order-info {
+            width: 50%;
+            margin: 130px 100px 100px auto;
+            padding-bottom: 60px;
+        }
+        body {
+            color: white;
+            background-color: black;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            setting();
+        })
+        function setting(){
+            let a = $('#name').text();
+            console.log(a);
+        }
+        function edit_box() {
+            popupWindow = window.open("/edit.html", "title", "resizeable");
+            popupWindow.resizeTo(430, 1050);
+            popupWindow.onresize = (_ => {
+                popupWindow.resizeTo(430, 1050);
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="title">
+    <a href="/"><img
+        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FxKBSX%2FbtsggNemdTt%2FsQKyO5aYxBkBaebtvoA4Z1%2Fimg.png"
+        width="130" height="150"></a> <a href="/"><img
+        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FE5Vzw%2Fbtsgjm1PrDK%2F57j80tqlRymVOQXTMhIo30%2Fimg.png"
+        width="360" height="130"></a>
+    </div>
+    <div class="container">
+        <div class="image">
+            <img src="{{myself['photo']}}" class="card-img-top" style="max-width: 300px; height: auto;">
+        </div>
+        <div class="description">
+            <h1 class="mytitle" >이름 : {{ myself['name'] }}</h1>
+            <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
+            <p class="mytime">자기 소개: {{myself['introduce']}}</p>
+            <p class="mytime">장점 : {{ myself['merits_demerits'] }}</p>
+            <p class="mytime">협업 스타일 : {{ myself['style'] }}</p>
+            <p class="mytime">blog_url : {{ myself['blog'] }}</p></a>
+            <p class="mytime">github_url : {{ myself['github'] }}</p>
+            <button class="mytext" type="button" onclick=edit_box()>수정하기</button>
+            <button class="mytext" type="button" onclick="location.href='/'">목록</button>
+        </div>
+    </div>
+    <div class="mytitle1">
+        <h1>A4조 김동규 입니다.</h1>
+    </div>
+    <img src="https://i.ibb.co/KVPDb9z/image.jpg" class="img-thumbnail" alt="mylists"
+        style="margin-top: 50px; margin-left: 100px; border: 5px; float: left; width: 300px;height: 350px; box-shadow:5px 5px 5px grey; border-radius: 10%;">
+    <div class="order-info">
+        <div class="input-group mb-3" style="margin-left: -300px; margin-top: -70px;">
+            <span class="input-group-text"><strong>이름</strong></span>
+            <span class="form-control">김동규</span>
+        </div>
+        <div class="input-group mb-3" style="margin-left: -300px; margin-top: -5px;">
+            <span class="input-group-text"><strong>스트레스 푸는 방법</strong></span>
+            <span class="form-control">맛있는 음식 먹기, 여행, 드라이브, 친구들 만나서 술 마시기</span>
+        </div>
+        <div class="input-group mb-3" style="margin-left: -300px; margin-top: -5px;">
+            <span class="input-group-text"><strong>취미</strong></span>
+            <span class="form-control">게임, 산책, 유튜브 시청</span>
+        </div>
+        <div class="input-group mb-3" style="margin-left: -300px; margin-top: -5px;">
+            <span class="input-group-text"><strong>목표</strong></span>
+            <span class="form-control">1년안에 최대한 빠르게 성장하기, 주니어 개발자로 취업하기</span>
+        </div>
+        <div class="input-group mb-3" style="margin-left: -300px; margin-top: -5px;">
+            <span class="input-group-text"><strong>최근 공부하는 것들</strong></span>
+            <span class="form-control">수학(나중을 위해 하는중입니다.), 영어(OPIC시험 공부를 하고 있습니다.)</span>
+        </div>
+        <a href="https://github.com/BenKim95" target="_blank" class="fa-brands fa-github fa-fade fa-4x"
+            style="color: white; margin-left: -50px; margin-top: 15px; --fa-animation-duration: 2s; --fa-fade-opacity: 0.6;">
+        </a>
+        <a href="https://velog.io/@dk_ovo" target="_blank" class="fa-brands fa-blogger fa-fade fa-4x"
+            style="color: white; margin-left: 50px; margin-top: 15px; --fa-animation-duration: 2s; --fa-fade-opacity: 0.6;">
+        </a>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>상세 페이지</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        .title {
+            text-align: center;
+            padding: 20px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .container {
+            border: 1px solid white;
+            width: 900px;
+            height: 500px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            /* 이미지 및 설명을 가로로 중앙에 위치시키는 방법 추가 */
+        }
+
+        .image {
+            max-width: 30%;
+            margin-left: 10px;
+            /* 좌측 마진을 조정합니다. */
+            margin-right: 10px;
+            /* 우측 마진을 조정합니다. */
+        }
+
+        .image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .description {
+            max-width: 70%;
+            padding-left: 20px;
+        }
+
+        .pr1 {
+            background-color: green;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .mytext {
+            border-color: black;
+            background-color: white;
+            border-radius: 10px;
+            font-size: 20px;
+            transition: all 0.4s;
+        }
+
+        .TeamIntroduce {
+            border: 1px solid white;
+            margin: auto;
+            width: 900px;
+            height: 500px;
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0px;
+        }
+
+        header {
+            background-color: #ffeb3b;
+            height: 700px;
+            padding: 100px;
+        }
+
+        section {
+            display: flex;
+            justify-content: space-between;
+            padding: 5%;
+        }
+
+        section div {
+            background-color: #ff9800;
+            width: 23%;
+            height: 300px;
+        }
+
+        /* Scroll Animation (sa, 스크롤 애니메이션) */
+        .sa {
+            opacity: 0;
+            transition: all .5s ease;
+        }
+
+        /* 왼쪽에서 오른쪽으로 페이드 인 */
+        .sa-right {
+            width: 150px;
+            height: 180px;
+            background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fv40vr%2FbtsglRg1syF%2FTSPtTfw9AGA6RbclrVnBX1%2Fimg.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: translate(-100px, 0);
+        }
+
+        .ssa-right {
+            width: 280px;
+            height: 180px;
+            background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbHN64I%2FbtsfWU5BVqs%2FEDjMV4l7QDH7gSpgMqbjU1%2Fimg.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: translate(-100px, 0);
+        }
+
+        .ssa2-right {
+            width: 240px;
+            height: 190px;
+            background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbtU6te%2Fbtsgcra3ZL4%2FxfzaUpJHEANLhJTAQVBMPk%2Fimg.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: translate(-100px, 0);
+        }
+
+        .ssa3-right {
+            width: 165px;
+            height: 160px;
+            background-image: url(https://search.pstatic.net/common/?src=http%3A%2F%2Fcafefiles.naver.net%2FMjAxOTA5MThfMjgy%2FMDAxNTY4ODEwMTg4MTE5.va7lJexpD36xfXnlDO5yYXnhLpLNWJydf0wrfdNjR5Ig.Iyw6AQjl5k8TPHOkWasrwpPYifbD6i9I3GcABOaJYzkg.JPEG%2FexternalFile.jpg&type=sc960_832);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: translate(-100px, 0);
+        }
+
+        /* 오른쪽에서 왼쪽으로 페이드 인 */
+        .sa-left {
+            width: 220px;
+            height: 165px;
+            background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdcQ1Yx%2FbtsgcOX522c%2FBSmwTvt9LgQWTn087uBtV0%2Fimg.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 1px solid black;
+            transform: translate(-100px, 0);
+            transform: translate(100px, 0);
+        }
+
+        .ssa-left {
+            width: 245px;
+            height: 165px;
+            background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FJvIHe%2Fbtsgjmzb4Ju%2FokS3JlX7d1cIn0vSW6ZKK1%2Fimg.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 1px solid black;
+            transform: translate(-100px, 0);
+            transform: translate(100px, 0);
+        }
+
+        .sa1-right {
+            height: 180px;
+        }
+
+        .sa.show {
+            opacity: 1;
+            transform: none;
+        }
+
+        #a {
+            height: 25vh;
+        }
+
+        .aa {
+            background-color: black;
+            color: white;
+        }
+
+        .slideshow-image {
+            border-radius: 3%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mySlides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }
+
+        .mySlides.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .slideshow-container {
+            position: relative;
+            margin: auto;
+            width: 300px;
+            height: 200px;
+            overflow: hidden;
+            box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            setting();
+        })
+        function setting() {
+            let a = $('#name').text();
+            console.log(a);
+        }
+
+
+        function edit_box() {
+            popupWindow = window.open("/edit.html", "title", "resizeable");
+            popupWindow.resizeTo(430, 1050);
+            popupWindow.onresize = (_ => {
+                popupWindow.resizeTo(430, 1050);
+            })
+        }
+
+
+    </script>
+</head>
+
+<body class="aa">
+
+    <div class="title">
+        <a href="/"><img
+                src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FxKBSX%2FbtsggNemdTt%2FsQKyO5aYxBkBaebtvoA4Z1%2Fimg.png"
+                width="130" height="150"></a> <a href="/"><img
+                src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FE5Vzw%2Fbtsgjm1PrDK%2F57j80tqlRymVOQXTMhIo30%2Fimg.png"
+                width="360" height="130"></a>
+    </div>
+
+    <div class="container">
+        <div class="image">
+            <img src="{{myself['photo']}}" class="card-img-top" style="max-width: 300px; height: auto;">
+        </div>
+        <div class="description">
+            <h1 class="mytitle">이름 : {{ myself['name'] }}</h1>
+            <textarea id="name" class="hide">{{ myself['name'] }}</textarea>
+            <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
+            <p class="mytime">자기 소개: {{myself['introduce']}}</p>
+            <p class="mytime">장점 : {{ myself['merits_demerits'] }}</p>
+            <p class="mytime">협업 스타일 : {{ myself['style'] }}</p>
+            <p class="mytime">blog_url : {{ myself['blog'] }}</p></a>
+            <p class="mytime">github_url : {{ myself['github'] }}</p>
+            <button class="mytext" type="button" onclick=edit_box()>수정하기</button>
+            <button class="mytext" type="button" onclick="location.href='/'">목록</button>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="TeamIntroduce">
+        <h1>저의 프로필을 선택하신 여러분 환영합니다🤗</h1>
+
+        <b>우선 제 소개를 하자면 저는 인하공전 컴퓨터정보학과를 졸업한 24살 김규준이라고 합니다!! <br>
+            DevOps분야에 관심을 가지게 되면서 개발과 DevOps공부를 병행하고자 합류하게 되었습니다.<br>
+            전공자이긴 하지만 운동선수를 하다가 공부로 넘어왔기에 부족한 부분이 많습니다😂<br>
+            부족한 부분이 많아도 서로 도움을 주면서 4개월동안 좋은 개발자로 성장했으면 좋겠습니다💻⌨🖱<br>
+            이상으로 간단한 소개 및 인사를 마치고 제가 좋아하는 것들을 사진과 함께 알아보시죠🧐<br><br>
+            <a href="https://github.com/mbc2579"><img
+                    src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Ff3%2Fd8%2F92%2Ff3d89232a7a02f999036f25c1b37e771.png&type=sc960_832"
+                    width="50px" height="50px"></a>
+            <a href="https://www.instagram.com/jjun2._.ya/"><img
+                src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjExMDZfMjY4%2FMDAxNjY3NzM4NzI1OTI0.chUNmvqNDiYAwDPQqn78PrlR3na8Xd6mvt-qbaTYVjwg.MbGuTaCS0IEqGoe5TI_MvNCkL0Cd9krUw28tNERQdLcg.PNG.josephk1010%2F%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5%25B7%25CE%25B0%25ED_new2016-01.png&type=sc960_832"
+                width="50px" height="50px"></b></a>
+
+                <br><br>
+
+                <div class="slideshow-container">
+                    <div class="mySlides fade">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbHN64I%2FbtsfWU5BVqs%2FEDjMV4l7QDH7gSpgMqbjU1%2Fimg.jpg"
+                            class="slideshow-image">
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdwCbeZ%2FbtsglOq2ERW%2FZUBYVTOBTAZu9Ctkux8aqK%2Fimg.jpg"
+                            class="slideshow-image">
+                    </div>
+                    <div class="mySlides fade">
+                        <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbtU6te%2Fbtsgcra3ZL4%2FxfzaUpJHEANLhJTAQVBMPk%2Fimg.jpg"
+                            class="slideshow-image">
+                    </div>
+    </div>
+
+        <br>
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </div>
+
+    <main>
+        <section id="a">
+            <div class="sa sa2-right" style="background-color: black;"></div>
+            <div class="sa sa-right" style="background-color: black;"></div>
+            <div class="sa ssa-right" style="background-color: black;"></div>
+            <div class="sa sa1-right" style="background-color: black;">저는 2023년 올해 졸업을
+                하였습니다.<br>졸업 후 관심있는 분야를 공부하기 위해 스파르타에 합류를 하게 되었습니다.</div>
+            <div class="sa sa2-right" style="background-color: black;"></div>
+        </section>
+        <section id="a">
+            <div class="sa sa1-right" style="background-color: black;"></div>
+            <div class="sa sa1-right" style="background-color: black;">저는 2023년 올해 졸업을 하였습니다. <br>졸업 후 관심있는 분야를 공부하기 위해
+                스파르타에 합류를 하게 되었습니다.</div>
+            <div class="sa ssa-left" style="background-color: black;"></div>
+            <div class="sa sa-left" style="background-color: black;"></div>
+            <div class="sa sa1-right" style="background-color: black;"></div>
+        </section>
+        <section id="a">
+            <div class="sa sa2-right" style="background-color: black;"></div>
+            <div class="sa ssa3-right" style="background-color: black;"></div>
+            <div class="sa ssa2-right" style="background-color: black;"></div>
+            <div class="sa sa1-right" style="background-color: black;">저는 2023년 올해 졸업을
+                하였습니다.<br>졸업 후 관심있는 분야를 공부하기 위해 스파르타에 합류를 하게 되었습니다.</div>
+            <div class="sa sa2-right" style="background-color: black;"></div>
+        </section>
+        <section id="a">
+            <div class="sa sa1-right" style="background-color: black;"></div>
+            <div class="sa sa-right" style="background-color: black;"></div>
+            <div class="sa sa1-right" style="background-color: black;">저는 2022년 올해 졸업을 하였습니다. <br>졸업 후 관심있는 분야를 공부하기 위해
+                스파르타에 합류를 하게 되었습니다.</div>
+            <div class="sa sa1-right" style="background-color: black;"></div>
+        </section>
+    </main>
+
+    <script>
+
+        var slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.opacity = 0;
+                slides[i].style.pointerEvents = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }
+            slides[slideIndex - 1].style.opacity = 1;
+            slides[slideIndex - 1].style.pointerEvents = "auto";
+            setTimeout(showSlides, 2000); // 2초마다 이미지 전환
+        }
+
+
+        const saTriggerMargin = 300;
+        const saElementList = document.querySelectorAll('.sa');
+
+        const saFunc = function () {
+            for (const element of saElementList) {
+                if (!element.classList.contains('show')) {
+                    if (window.innerHeight > element.getBoundingClientRect().top + saTriggerMargin) {
+                        element.classList.add('show');
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('load', saFunc);
+        window.addEventListener('scroll', saFunc);
+    </script>
+
+</body>
+
+</html>

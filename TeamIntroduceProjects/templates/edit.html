@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title>Team A4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        .title {
+            text-align: center;
+        }
+        .btn {
+            font-size: 40px;
+        }
+        .btn2 {
+            border: 0px;
+            padding-top: 10px;
+        }
+    </style>
+    <script>
+        function editing() {
+            let nname = $('#name').val();
+            let nintroduce = $('#introduce').val();
+            let nmbti = $('#mbti').val();
+            let nmerits_demerits = $('#merits_demerits').val();
+            let nstyle = $('#style').val();
+            let nblog = $('#blog').val();
+            let ngithub = $('#github').val();
+            let formData = new FormData();
+            formData.append("nname_give", nname);
+            formData.append("nintroduce_give", nintroduce);
+            formData.append("nmbti_give", nmbti);
+            formData.append("nmerits_demerits_give", nmerits_demerits);
+            formData.append("nstyle_give", nstyle);
+            formData.append("nblog_give", nblog);
+            formData.append("ngithub_give", ngithub);
+            fetch('/member/update', { method: "PUT", body: formData }).then((res) => res.json()).then((data) => {
+                alert(data['msg'])
+                opener.parent.location = "/";
+                window.close();
+            });
+        }
+        function close_box() {
+            window.close();
+        }
+    </script>
+</head>
+<body>
+    <div class="title">
+        <a href="/"><img src="https://blog.kakaocdn.net/dn/C9tc8/btsgfqWbd5E/JHJCNdq1kiBtlM7MgxwfT0/img.png" width="120"
+            height="150"></a> <a href="/"><img
+            src="https://blog.kakaocdn.net/dn/rGKiN/btsf6FOokeB/yn0up2kIAvfC7E0TGkDlxK/img.jpg" width="360"
+            height="80"></a>
+    </div>
+    <div class="mypost" id="post-box">
+        <div class="form-floating">
+            <textarea id="name" class="form-control" placeholder="이름"></textarea>
+            <label for="floatingTextarea2">이름</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="introduce" class="form-control" placeholder="간단한 자기소개"></textarea>
+            <label for="floatingTextarea2">간단한 자기소개</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="mbti" class="form-control" placeholder="MBTI"></textarea>
+            <label for="floatingTextarea2">MBTI</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="merits_demerits" class="form-control" placeholder="장단점"></textarea>
+            <label for="floatingTextarea2">장단점</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="style" class="form-control" placeholder="협업 스타일"></textarea>
+            <label for="floatingTextarea2">협업 스타일</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="blog" class="form-control" placeholder="블로그 주소"></textarea>
+            <label for="floatingTextarea2">블로그 주소</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="github" class="form-control" placeholder="깃허브 주소"></textarea>
+            <label for="floatingTextarea2">깃허브 주소</label>
+        </div>
+        <div class="mybtns">
+            <button onclick="editing()" type="button" class="btn2 btn-dark">수정하기</button>
+            <button onclick="close_box()" type="button" class="btn2 btn-outline-dark">닫기</button>
+        </div>
+</body>
+</html>

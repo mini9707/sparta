@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>상세 페이지</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        .title {
+            text-align: center;
+            padding: 20px;
+        }
+        html,
+        body {
+            background-color: black;
+            height: 100%;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        .image {
+            max-width: 30%;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .description {
+            max-width: 70%;
+            padding-left: 20px;
+            padding-bottom: 30px;
+        }
+        .pr1 {
+            background-color: green;
+        }
+        .hide {
+            display: none;
+        }
+        .mytext {
+            border-color: black;
+            background-color: white;
+            border-radius: 10px;
+            font-size: 20px;
+            transition: all 0.4s;
+        }
+        .mytitle {
+            color: white;
+        }
+        .mytime {
+            color: white;
+        }
+        .slideshow-image {
+            border-radius: 3%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .mySlides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }
+        .mySlides.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .slideshow-container {
+            position: relative;
+            margin: 250px auto auto auto;
+            width: 300px;
+            height: 400px;
+            overflow: hidden;
+            box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.5);
+        }
+        .intro {
+            color: white;
+            overflow: auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            setting();
+        });
+        function setting() {
+            let a = $('#name').text();
+            console.log(a);
+        }
+        function edit_box() {
+            popupWindow = window.open("/edit.html", "title", "resizeable");
+            popupWindow.resizeTo(430, 1050);
+            popupWindow.onresize = (_ => {
+            popupWindow.resizeTo(430, 1050);
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="title">
+        <a href="/"><img src="https://blog.kakaocdn.net/dn/C9tc8/btsgfqWbd5E/JHJCNdq1kiBtlM7MgxwfT0/img.png" width="120"
+                height="150"></a> <a href="/"><img
+                src="https://blog.kakaocdn.net/dn/rGKiN/btsf6FOokeB/yn0up2kIAvfC7E0TGkDlxK/img.jpg" width="360"
+                height="80"></a>
+    </div>
+    <div class="container">
+        <div class="image">
+            <img src="{{myself['photo']}}" class="card-img-top" style="max-width: 300px; height: auto;">
+        </div>
+        <div class="description">
+            <h1 class="mytitle">이름 : {{ myself['name'] }}</h1>
+            <textarea id="name" class="hide">{{ myself['name'] }}</textarea>
+            <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
+            <p class="mytime">자기 소개: {{myself['introduce']}}</p>
+            <p class="mytime">장점 : {{ myself['merits_demerits'] }}</p>
+            <p class="mytime">협업 스타일 : {{ myself['style'] }}</p>
+            <p class="mytime">blog_url : {{ myself['blog'] }}</p>
+            <p class="mytime">github_url : {{ myself['github'] }}</p>
+            <button class="mytext" type="button" onclick="edit_box()">수정하기</button>
+            <button class="mytext" type="button" onclick="location.href='/'">목록</button>
+        </div>
+    </div>
+    <div>
+        <div class="slideshow-container">
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbNbswE%2FbtsgwayvadI%2FL90GrXtAisIRuuet4IBff0%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbANQtq%2FbtsgpXui81g%2FYRcCfQmG4HtEakE2jt3Yk1%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FkAtkA%2FbtsgsQuT1yc%2FSXupg845Ey7lpokCtfHdhK%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FmxvcZ%2FbtsgugGj65a%2F6n2QPPJLrOteGkUjg12Xb0%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrCFnt%2FbtsgtfH5KHA%2FJE2YVZL45k5KGEX4hrkoOk%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FtzXEk%2FbtsgtDooYEo%2F05EwT7oJUpbHrGxKmFlm1K%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdjNeEP%2FbtsgtO4lnTz%2FKcwFBkkOisBkO1fRGfvbp1%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FWUBTV%2FbtsgtgAdvIn%2FKqB53uT63HQcx4Asd1iOJk%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcC6so1%2FbtsgvBb3o8t%2Fi9wUKI1yhK67rXstuMYIZK%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fshnze%2FbtsgtCXlu0S%2F9kPBRQYa0coZRE0WDZ0ta1%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbLg30Q%2FbtsgtDPtMlY%2FY8E3DCFMwdNh0jSGZRKyAK%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+            <div class="mySlides fade slideshow-image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FctmonI%2FbtsgvCPx6ME%2FmQ6QEwVl4XUGOyw1KvIUw0%2Fimg.jpg"
+                    class="slideshow-image">
+            </div>
+        </div>
+        <br>
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        <div class="intro" id="intro-text">
+            <p id="changing-text">안녕하세요 등산과 사진 촬영을 좋아하는 코린이 김휘수라고 합니다.</p>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+    <script>
+        var slideIndex = 0;
+        showSlides();
+        changeText();
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.opacity = 0;
+                slides[i].style.pointerEvents = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }
+            slides[slideIndex - 1].style.opacity = 1;
+            slides[slideIndex - 1].style.pointerEvents = "auto";
+            setTimeout(showSlides, 2000); // 2초마다 이미지 전환
+        }
+        function changeText() {
+            var changingText = document.getElementById('changing-text');
+            var texts = [
+                '불꽃놀이 같이 짧은 순간을 촬영하는걸 좋아하고',
+                '풍경 사진을 주로 찍습니다.',
+                '가끔은 꽃이나 음식사진도 촬영해요, 잘 부탁드립니다 :)',
+            ]; // 변경할 텍스트들
+            var index = 0; // 텍스트 배열의 인덱스
+            setInterval(function () {
+                changingText.textContent = texts[index]; // 텍스트 변경
+                index++; // 다음 텍스트로 인덱스 증가
+                if (index >= texts.length) {
+                    index = 0; // 인덱스가 배열 범위를 넘어갈 경우 처음으로 초기화
+                }
+            }, 6000); // 6초마다 실행
+        }
+    </script>
+</body>
+</html>

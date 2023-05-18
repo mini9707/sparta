@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>상세 페이지</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap" rel="stylesheet">
+    <!--aos 라이브러리 추가-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+        .title {
+            text-align: center;
+            padding: 20px;
+        }
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background-color: black;
+            color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            /* 이미지 및 설명을 가로로 중앙에 위치시키는 방법 추가 */
+        }
+        .image {
+            max-width: 30%;
+            margin-left: 10px;
+            /* 좌측 마진을 조정합니다. */
+            margin-right: 10px;
+            /* 우측 마진을 조정합니다. */
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+        }
+        .description {
+            max-width: 70%;
+            padding-left: 20px;
+        }
+        .mytext {
+            border-color: black;
+            background-color: white;
+            border-radius: 10px;
+            font-size: 20px;
+            transition: all 0.4s;
+        }
+        .blue {
+            background-color: green;
+            text-align: center;
+        }
+        .container>img {
+            align-items: center;
+            width: 300px;
+            height: 500px;
+            border-radius: 10px;
+        }
+        .textbox {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin-left:10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            setting();
+        })
+        function setting() {
+            let a = $('#name').text();
+            console.log(a);
+        }
+        function edit_box() {
+            popupWindow = window.open("/edit.html", "title", "resizeable");
+            popupWindow.resizeTo(430, 1050);
+            popupWindow.onresize = (_ => {
+                popupWindow.resizeTo(430, 1050);
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="title">
+        <a href="/"><img
+            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FxKBSX%2FbtsggNemdTt%2FsQKyO5aYxBkBaebtvoA4Z1%2Fimg.png"
+            width="130" height="150"></a> <a href="/"><img
+            src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FE5Vzw%2Fbtsgjm1PrDK%2F57j80tqlRymVOQXTMhIo30%2Fimg.png"
+            width="360" height="130"></a>
+    </div>
+    <div class="container" style="border:3px dotted; padding-top:100px; padding-bottom:100px; border-color:rgb(255, 255, 255)">
+        <div class="image">
+            <img src="{{myself['photo']}}" class="card-img-top" style="max-width: 300px; height: auto;">
+        </div>
+        <div class="description">
+            <h1 class="mytitle">이름 : {{ myself['name'] }}</h1>
+            <p class="mytime">MBTI : {{ myself['mbti'] }}</p>
+            <p class="mytime">자기 소개: {{myself['introduce']}}</p>
+            <p class="mytime">장점 : {{ myself['merits_demerits'] }}</p>
+            <p class="mytime">협업 스타일 : {{ myself['style'] }}</p>
+            <p class="mytime"><img src="https://t1.daumcdn.net/cfile/tistory/9929C8455FEADCE219" width="30" height="30">
+                : <a href="{{myself['blog']}}">{{ myself['blog'] }}</a></p>
+            <p class="mytime"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                    class="bi bi-github" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                </svg> : <a href="{{myself['github']}}">{{ myself['github'] }}</a></p>
+            <button class="mytext" type="button" onclick=edit_box()>수정하기</button>
+            <button class="mytext" type="button" onclick="location.href='/'">목록</button>
+        </div>
+    </div>
+    <br><br><br><br>
+    <div>
+        <div class="container">
+            <img class="image"
+                src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FnvlMq%2FbtsgtwWmOJK%2Fw7yJhPxNKkYQheUL3h1kIK%2Fimg.png">
+            <div style="border:3px dotted; padding:5px; border-color:rgb(103, 103, 245);" class="textbox">
+                <p style="font-size:30px">저희집 막내 <span style="color:rgb(103, 103, 245); font-weight:bold; font-size:40px">겨울이</span>
+                    입니다 !</p>
+                <p style="font-size:20px">올해로 7살이고 소간이랑 오리고기, 육포를 좋아한답니다</p>
+                <p style="font-size:20px">카메라를 들면 저렇게 이쁘게 쳐다봐줘서 사진찍어줄 맛이 나요</p>
+                <p style="font-size:20px">겨울이에 대해 궁금하신 분들이 있다면 인스타에 더 많은 사진이 있답니다💙</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                  </svg><span style="color:rgb(103, 103, 245); font-weight: bold; font-size: 30px;">&nbsp;&nbsp;winter_161021 </span>많관부~
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="container">
+            <div style="border:3px dotted; padding:5px; border-color:rgb(60, 253, 108);" class="textbox">
+                <p style="font-size:30px">저의 취미는 <span style="color:rgb(60, 253, 108); font-weight:bold; font-size:40px">등산</span> 입니다 !</p>
+                <p style="font-size:20px">시간이 맞는 친구들과 가끔 등산을 가요!</p>
+                <p style="font-size:20px">등산 좋아하시는 분 계시면 같이 등산하러 가요~</p>
+            </div>
+            <img style="width:500px; height: 500px; margin-left:20px"; src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FNI2gv%2FbtsgmJQwJow%2FHDZVTHNHLqGDvopr0kCwu0%2Fimg.png">
+        </div>
+        <br><br><br><br>
+        <div class="container">
+            <img style="width:500px; height: 400px;"; src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FtCi48%2FbtsgnX1UKPE%2Fr9dxFDvrOMijbKYIKSNYA1%2Fimg.png">
+            <div style="border:3px dotted; padding:5px; border-color:rgb(252, 34, 99);" class="textbox">
+                <p style="font-size:30px">저는 <span style="color:rgb(252, 34, 99); font-weight:bold; font-size:40px">주정뱅이</span> 입니다 !</p>
+                <p style="font-size:20px">술자리를 좋아해요! 술은 잘 못마십니다!</p>
+                <p style="font-size:20px">최애 조합은 <span style="color:rgb(252, 34, 99); font-weight:bold; font-size:40px">곱쏘, 삼쏘</span> 입니다😍</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

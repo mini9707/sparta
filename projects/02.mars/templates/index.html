@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+
+    <title>Movie of the day(MOTD)</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .mytitle {
+            width: 100%;
+            height: 250px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://movie-phinf.pstatic.net/20210715_95/1626338192428gTnJl_JPEG/movie_image.jpg');
+            background-position: center;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle>button {
+            width: 200px;
+            height: 50px;
+
+            background-color: transparent;
+            color: white;
+
+            border-radius: 50px;
+            border: 1px solid white;
+
+            margin-top: 10px;
+        }
+
+        .card-head {
+            position: relative;
+        }
+
+        .card-img-top {
+            display: block;
+            max-width: 480px;
+            height: auto;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.1s;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-decoration: double;
+            text-align: center;
+            padding-top: 50%;
+            box-sizing: border-box;
+        }
+
+        .mytitle>button:hover {
+            border: 2px solid white;
+        }
+
+        .card-img-top:hover, .text-overlay:hover{
+            opacity: 0.75;
+        }
+
+        .mycomment {
+            color: gray;
+        }
+
+        .mycards {
+            margin: 20px auto 0px auto;
+            width: 95%;
+            max-width: 960px;
+        }
+
+        .post-box, .edit-box, .reply-box, .reply-edit-box {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px gray;
+
+            display: none;
+        }
+
+        .mybtns {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 20px;
+        }
+
+        .mybtns>button {
+            margin-right: 10px;
+        }
+
+        .replies {
+            width: 100%;
+            text-align: center;
+            background-color: aliceblue;
+            border: 1px double lightgray;
+        }
+
+        .btn-reply{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;    
+        }
+
+        .btn-edit,
+        .btn-delete {
+            display: flex;
+            justify-content: center;
+            align-items: cetner;
+            width: 50%;
+            height: 30px;
+            background-color: khaki;
+            border: 1px double lightgoldenrodyellow; 
+            cursor: pointer;
+        }
+
+        .btn-edit:hover,
+        .btn-delete:hover{
+            background-color: lightyellow;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        var number = 0
+        function listing(){
+            fetch('/comment').then((res) => res.json()).then((data) =>{
+                let comments = data['result']
+                const checklist = Array.from({length: comments.length}, () => false);
+
+                fetch('/movie').then((res2) => res2.json()).then((data2) => {
+                    let rows = data2['result']
+                    i = 0
+
+                    rows.forEach((a) => {
+                        let comment = a['comment']
+                        let desc = a['desc']
+                        let title = a['title']
+                        let image = a['image']
+                        let star = '⭐'.repeat(a['star'])
+                        let genre = a['genre']
+
+                        reply_search(checklist, comments, comment, i+1).then((reply) => {
+                            i += 1
+                            let temp_html = `
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="card-head" onclick="open_reply(${i})">
+                                        <img src="${image}" class="card-img-top">
+                                        <div class="text-overlay"> 댓글 등록하기!</div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">${title}</h5>
+                                        <p class="card-text">${desc}</p>
+                                        <p>${star}</p>
+                                        <p class="mycomment comment${i}">${comment}</p>
+                                        <p>장르 : ${genre}</p>
+                                        <div class="mybtns">
+                                            <button type="button" class="btn btn-outline-info" onclick="open_edit(${i})">수정하기</button>
+                                            <button type="button" class="btn btn-outline-warning" onclick="deleting(${i})">삭제하기</button>                                        
+                                        </div>
+                                    </div>
+                                    <div class="replies">
+                                        ${reply}
+                                    </div>
+                                </div>
+                            </div>`
+                            $('#cards-box').append(temp_html)
+                        })
+                    })
+                })
+            })
+        }
+
+        async function reply_search(checklist, comments, comment, i){
+            try {
+                let idx = 0
+                let content = '아직 댓글이 없습니다.<br>첫번째 댓글의 주인이 되세요!'
+
+                for(const element of comments) {
+                    if(checklist[idx++]) continue
+                    if(comment == element['key']){
+                        checklist[idx-1] = true
+                        content = `
+                            <p class="myreply reply${i}">${element['content']}</p>
+                            <div class="btn-reply">
+                                <p class="btn-edit" onclick="open_reply_edit(${i})">수정</p>
+                                <p class="btn-delete" onclick="reply_deleting(${i})">삭제</p>
+                            </div>
+                        `
+                        return content
+                    }
+                }
+
+                return content
+            } catch(error) {
+                console.error(error)
+            }
+        }
+
+        function isValidURL(url) {
+            var RegExp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+
+            if(RegExp.test(url)) return true;
+            return false;
+        }
+
+        function posting() {
+            let url = $('#url').val()
+            let comment = $('#comment').val()
+            let star = $('#star').val()
+            let genre = $('#genre').val()
+            
+            if(!isValidURL(url))
+                alert("유효하지 않은 url 형식입니다.")
+            else {
+                let formData = new FormData()
+                formData.append("url_give", url)
+                formData.append("comment_give", comment)
+                formData.append("star_give", star)
+                formData.append("genre_give", genre)
+
+                fetch('/movie', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+                    alert(data['msg'])
+                    window.location.reload()
+                })
+            }
+        }
+
+        function reply_posting() {
+            let key = $('.comment' + number.toString())[0].innerHTML
+            let name = $('#name').val()
+            let content = $('#content').val()
+            let agree = $('#agree').val()
+
+            let formData = new FormData()
+            formData.append("key_give", key)
+            formData.append("name_give", name)
+            formData.append("content_give", content)
+            formData.append("agree_give", agree)
+
+            fetch('/comment', { method: "POST", body: formData }).then((res) => res.json()).then((data) => {
+                alert(data['msg'])
+                window.location.reload()
+            })
+        }
+
+        function editing() {
+            let url = $('#nurl').val()
+            let ocomment = $('.comment' + number.toString())[0].innerHTML
+            let ncomment = $('#ncomment').val()
+            let star = $('#nstar').val()
+            l
+
+            if(!isValidURL(url))
+                alert("유효하지 않은 url 형식입니다.")
+            else {
+                let formData = new FormData()
+                formData.append("url_give", url)
+                formData.append("comment_give", ocomment)
+                formData.append("ncomment_give", ncomment)
+                formData.append("star_give", star)
+
+                fetch('/movie', { method: "PUT", body: formData }).then((res) => res.json()).then((data) => {
+                    alert(data['msg'])
+                    window.location.reload()
+                })
+            }
+        }
+
+        function reply_editing() {
+            let name = $('#nname').val()
+            let ocontent = $('.reply' + number.toString())[0].innerHTML
+            let ncontent = $('#ncontent').val()
+            let agree = $('#nagree').val()
+
+            let formData = new FormData()
+            formData.append('name_give', name)
+            formData.append('ocontent_give', ocontent)
+            formData.append('ncontent_give', ncontent)
+            formData.append('agree_give', agree)
+
+            fetch('/comment', { method: "PUT", body: formData}).then((res) => res.json()).then((data) => {
+                alert(data['msg'])
+                window.location.reload()
+            })
+        }
+
+        function deleting(n) {
+            if (confirm("해당 게시글을 삭제할까요?")) {
+                let comment = $('.comment' + n.toString())[0].innerHTML
+
+                let formData = new FormData()
+                formData.append("comment_give", comment)
+
+                fetch('/movie', { method: "DELETE", body: formData }).then((res) => res.json()).then((data) => {
+                    alert(data['msg'])
+                    window.location.reload()
+                })
+            }
+        }
+
+        function reply_deleting(n) {
+            if (confirm("해당 댓글을 삭제할까요?")) {
+                let content = $('.reply' + n.toString())[0].innerHTML
+
+                let formData = new FormData()
+                formData.append("content_give", content)
+
+                fetch('/comment', { method: "DELETE", body: formData }).then((res) => res.json()).then((data) => {
+                    alert(data['msg'])
+                    window.location.reload()
+                })
+            }
+        }
+
+        function close_all() {
+            $('.post-box').hide()
+            $('.edit-box').hide()
+            $('.reply-box').hide()
+            $('.reply-edit-box').hide()
+        }
+        function open_box() {
+            close_all()
+            $('.post-box').show()
+            scrollToBox()
+        }
+        function open_edit(n) {
+            number = n
+            close_all()
+            $('.edit-box').show()
+            scrollToBox()
+        }
+        function open_reply(n) {
+            number = n
+            close_all()
+            $('.reply-box').show()
+            scrollToBox()
+        }
+        function open_reply_edit(n) {
+            number = n
+            close_all()
+            $('.reply-edit-box').show()
+            scrollToBox()
+        }
+        function scrollToBox() {
+            const myBox = document.getElementById("myBox")
+            window.scrollTo({
+                top: myBox.offsetTop,
+                behavior: "smooth"
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div class="mytitle">
+        <h1>내 생애 최고의 영화들</h1>
+        <button onclick="open_box()">영화 기록하기</button>
+    </div>
+    <div id="myBox" class="post-box">
+        <div class="form-floating mb-3">
+            <input id="url" type="email" class="form-control" placeholder="name@example.com">
+            <label>영화URL</label>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">별점</label>
+            <select class="form-select" id="star">
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option selected value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+        </div>
+        <div class="form-floating">
+            <textarea id="comment" class="form-control" placeholder="Leave a comment here"></textarea>
+            <label for="floatingTextarea2">코멘트</label>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">별점</label>
+            <select class="form-select" id="genre">
+                <option value="액션">액션</option>
+                <option value="코믹">코믹</option>
+                <option selected value="로맨틱코미디">로맨틱코미디</option>
+                <option value="느와르">느와르</option>
+                <option value="드라마">드라마</option>
+            </select>
+        </div>
+        <div class="mybtns">
+            <button onclick="posting()" type="button" class="btn btn-dark">기록하기</button>
+            <button onclick="close_all()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+        
+    </div>
+
+    <div id="myBox" class="edit-box">
+        <div class="form-floating mb-3">
+            <input id="nurl" type="email" class="form-control" placeholder="name@example.com">
+            <label>영화URL</label>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">별점</label>
+            <select class="form-select" id="nstar">
+                <option value="5">⭐⭐⭐⭐⭐</option>
+                <option value="4">⭐⭐⭐⭐</option>
+                <option selected value="3">⭐⭐⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="1">⭐</option>
+            </select>
+        </div>
+        <div class="form-floating">
+            <textarea id="ncomment" class="form-control" placeholder="Leave a comment here"></textarea>
+            <label for="floatingTextarea2">코멘트</label>
+        </div>
+        <div class="mybtns">
+            <button onclick="editing()" type="button" class="btn btn-info">수정하기</button>
+            <button onclick="close_all()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+    <div id="myBox" class="reply-box">
+        <div class="form-floating mb-3">
+            <input id="name" type="text" class="form-control">
+            <label>작성자 닉네임</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="content" class="form-control" placeholder="Leave a comment here"></textarea>
+            <label for="floatingTextarea2">코멘트</label>
+        </div>
+        <hr>
+        <select id="agree" class="form-select">
+            <option selected value="1">공감👍</option>
+            <option value="2">비공감👎</option>
+        </select>
+        <div class="mybtns">
+            <button onclick="reply_posting()" type="button" class="btn btn-success">댓글달기</button>
+            <button onclick="close_all()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+    <div id="myBox" class="reply-edit-box">
+        <div class="form-floating mb-3">
+            <input id="nname" type="text" class="form-control">
+            <label>작성자 닉네임</label>
+        </div>
+        <div class="form-floating">
+            <textarea id="ncontent" class="form-control" placeholder="Leave a comment here"></textarea>
+            <label for="floatingTextarea2">코멘트</label>
+        </div>
+        <hr>
+        <select id="nagree" class="form-select">
+            <option selected value="1">공감👍</option>
+            <option value="2">비공감👎</option>
+        </select>
+        <div class="mybtns">
+            <button onclick="reply_editing()" type="button" class="btn btn-warning">댓글 수정하기</button>
+            <button onclick="close_all()" type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+    </div>
+</body>
+
+</html>
